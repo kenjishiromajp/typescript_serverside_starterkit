@@ -1,29 +1,23 @@
 import * as Hapi from 'hapi';
+import * as Mongoose from 'mongoose';
 import { server } from './server';
 
 const start = () =>{
+    Mongoose.connect("mongodb://localhost:27017/todolists");
+    const todoListsSchema = new Mongoose.Schema({
+        name: {type: String, required: true},
+        todos: [{
+            name: { type: String, required: true },
+            done: { type: Boolean }
+        }]
+    });
+    const todoListModel = Mongoose.model("TodoList", todoListsSchema, "todoLists");
+
     server.route({
         path: "/todolists",
         method: "GET",
-        handler: (request: Hapi.Request, h: Hapi.ResponseToolkit) => {
-            const todolists = [
-                {
-                    id: 1,
-                    name: "Nome X",
-                    todos: [
-                        {
-                            id: 3,
-                            name: "Todo 1",
-                            done: 1,
-                        },
-                        {
-                            id: 4,
-                            name: "Todo 2",
-                            done: 0,
-                        }
-                    ],
-                }
-            ]
+        handler: async (request: Hapi.Request, h: Hapi.ResponseToolkit) => {
+            const todolists = await todoListModel.find();
             return h.response(todolists).code(200);
         }
     });
