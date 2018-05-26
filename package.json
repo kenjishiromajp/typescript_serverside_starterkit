@@ -5,15 +5,19 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "dev": "nodemon --inspect=5858 -r ts-node/register src/index.ts",
     "build": "tsc"
   },
   "author": "Kenji",
   "license": "ISC",
   "dependencies": {
+    "hapi": "^17.5.0",
     "ts-node": "^6.0.5",
     "typescript": "^2.8.3"
   },
   "devDependencies": {
-    "@types/node": "^10.1.2"
+    "@types/hapi": "^17.0.12",
+    "@types/node": "^10.1.2",
+    "nodemon": "^1.17.5"
   }
 }
