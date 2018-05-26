@@ -4,15 +4,22 @@ import { server } from './server';
 
 const start = () =>{
     Mongoose.connect("mongodb://localhost:27017/todolists");
-    const todoListsSchema = new Mongoose.Schema({
+    interface ITodo extends Mongoose.Document{
+        mame: string;
+        done: boolean;
+    }
+    interface ITodoList extends Mongoose.Document{
+        mame: string;
+        todos: ITodo[],
+    }
+    const todoListSchema = new Mongoose.Schema({
         name: {type: String, required: true},
         todos: [{
             name: { type: String, required: true },
             done: { type: Boolean }
         }]
     });
-    const todoListModel = Mongoose.model("TodoList", todoListsSchema, "todoLists");
-
+    const todoListModel = Mongoose.model<ITodoList>("TodoList", todoListSchema, "todoLists");
     server.route({
         path: "/todolists",
         method: "GET",
