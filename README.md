@@ -1,6 +1,6 @@
 # Typescript Starter Kit
 
-> Projeto com configurações iniciais para um projeto back-end
+> Projeto com configurações iniciais para um projeto back-end com typescript
 
 # Como rodar a aplicação?
 - primeiro certifique que você possui o node.js instalado na sua máquina na versão acima ou igual a `7.0`

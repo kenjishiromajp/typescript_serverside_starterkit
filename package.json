@@ -1,5 +1,5 @@
 {
-  "name": "Typescript Starter Kit",
+  "name": "typescript_starter_kit",
   "version": "1.0.0",
   "description": "Um projeto inicial para começar com o Typescript",
   "main": "src/index.ts",
@@ -12,5 +12,8 @@
   "dependencies": {
     "ts-node": "^6.0.5",
     "typescript": "^2.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^10.1.2"
   }
 }
