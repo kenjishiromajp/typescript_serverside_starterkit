@@ -2,6 +2,16 @@ import * as Hapi from 'hapi';
 import * as Mongoose from 'mongoose';
 import { server } from './server';
 
+// Pegando os Erros de exceção
+process.on('uncaughtException', (error: Error) => {
+    console.error(`uncaughtException ${error.message}`);
+});
+
+// Pegando os Erros de Promises
+process.on('unhandledRejection', (reason: any) => {
+    console.error(`unhandledRejection ${reason}`);
+});
+
 const start = () =>{
     Mongoose.connect("mongodb://localhost:27017/todolists");
     interface ITodo extends Mongoose.Document{
