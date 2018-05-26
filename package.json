@@ -1,0 +1,16 @@
+{
+  "name": "Typescript Starter Kit",
+  "version": "1.0.0",
+  "description": "Um projeto inicial para começar com o Typescript",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "author": "Kenji",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^6.0.5",
+    "typescript": "^2.8.3"
+  }
+}
