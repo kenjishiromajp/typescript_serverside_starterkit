@@ -1,5 +1,7 @@
 import * as Hapi from 'hapi';
 import * as Mongoose from 'mongoose';
+import * as TodoList from './routes/todolist';
+import * as Database from './database';
 import { server } from './server';
 
 // Pegando os Erros de exceção
@@ -13,31 +15,8 @@ process.on('unhandledRejection', (reason: any) => {
 });
 
 const start = () =>{
-    Mongoose.connect("mongodb://localhost:27017/todolists");
-    interface ITodo extends Mongoose.Document{
-        mame: string;
-        done: boolean;
-    }
-    interface ITodoList extends Mongoose.Document{
-        mame: string;
-        todos: ITodo[],
-    }
-    const todoListSchema = new Mongoose.Schema({
-        name: {type: String, required: true},
-        todos: [{
-            name: { type: String, required: true },
-            done: { type: Boolean }
-        }]
-    });
-    const todoListModel = Mongoose.model<ITodoList>("TodoList", todoListSchema, "todoLists");
-    server.route({
-        path: "/todolists",
-        method: "GET",
-        handler: async (request: Hapi.Request, h: Hapi.ResponseToolkit) => {
-            const todolists = await todoListModel.find();
-            return h.response(todolists).code(200);
-        }
-    });
+    const database = Database.start();
+    TodoList.register(server, database);
     server.start();
 }
 
