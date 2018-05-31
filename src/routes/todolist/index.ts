@@ -16,4 +16,10 @@ export function register(
         method: "GET",
         handler: todoListController.getTodoLists
     });
+
+    server.route({
+        path: "/todolists",
+        method: "POST",
+        handler: todoListController.createTodoList
+    });
 }
