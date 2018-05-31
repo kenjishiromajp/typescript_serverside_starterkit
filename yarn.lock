@@ -39,7 +39,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/joi@*":
+"@types/joi@*", "@types/joi@^13.0.8":
   version "13.0.8"
   resolved "https://registry.yarnpkg.com/@types/joi/-/joi-13.0.8.tgz#224d5da224036f0c15b35e6980ba9de63b8ea374"
 
@@ -965,7 +965,7 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
-joi@13.x.x:
+joi@13.x.x, joi@^13.3.0:
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/joi/-/joi-13.3.0.tgz#4defd4333b539c5d10e444ab44f5a5583480f17c"
   dependencies:

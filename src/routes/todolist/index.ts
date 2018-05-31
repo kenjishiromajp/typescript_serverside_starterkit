@@ -2,6 +2,7 @@ import * as Hapi from 'hapi';
 import * as Mongoose from 'mongoose';
 import { IDatabase } from '../../database/interface';
 import { TodoListController } from './controller';
+import * as Validator from './validator';
 
 export function register(
     server: Hapi.Server,
@@ -20,6 +21,13 @@ export function register(
     server.route({
         path: "/todolists",
         method: "POST",
-        handler: todoListController.createTodoList
+        handler: todoListController.createTodoList,
+        options:{
+            validate:{
+                payload: Validator.validateTodoList,
+                failAction: (request, h, error) => { throw error; }
+            },
+            
+        }
     });
 }
