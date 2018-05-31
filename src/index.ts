@@ -1,6 +1,8 @@
-import * as Hapi from 'hapi';
-import * as Mongoose from 'mongoose';
+//rotas
 import * as TodoList from './routes/todolist';
+import * as Todo from './routes/todo';
+
+//Configurações
 import * as Database from './database';
 import { server } from './server';
 
@@ -17,6 +19,7 @@ process.on('unhandledRejection', (reason: any) => {
 const start = () =>{
     const database = Database.start();
     TodoList.register(server, database);
+    Todo.register(server, database);
     server.start();
 }
 
