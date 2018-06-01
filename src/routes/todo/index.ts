@@ -29,10 +29,10 @@ export function register(
         method: ["PATCH", "PUT"],
         handler: todoController.updateTodo,
         options:{
-            // validate: {
-            //     payload: Validator.validateTodo,
-            //     failAction: (request, h, error) => { throw error; }
-            // }
+            validate: {
+                payload: Validator.validateUpdateTodo,
+                failAction: (request, h, error) => { throw error; }
+            }
         }
     });
 }
