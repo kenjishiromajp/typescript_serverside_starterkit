@@ -19,7 +19,6 @@ export function register(
         options:{
             validate: {
                 payload: Validator.validateCreateTodo,
-                failAction: (request, h, error) => { throw error; }
             }
         }
     });
@@ -31,7 +30,6 @@ export function register(
         options:{
             validate: {
                 payload: Validator.validateUpdateTodo,
-                failAction: (request, h, error) => { throw error; }
             }
         }
     });

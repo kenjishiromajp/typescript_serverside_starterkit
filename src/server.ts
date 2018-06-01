@@ -5,6 +5,9 @@ export const server = new Hapi.Server({
     routes: {
         cors: {
             origin: ["*"]
+        },
+        validate:{
+            failAction: (request, h, error) => { throw error; }
         }
     }
 });

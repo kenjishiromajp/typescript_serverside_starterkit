@@ -25,7 +25,6 @@ export function register(
         options:{
             validate:{
                 payload: Validator.validateCreateTodoList,
-                failAction: (request, h, error) => { throw error; }
             },
         }
     });
@@ -37,7 +36,6 @@ export function register(
         options:{
             validate:{
                 payload: Validator.validateUpdateTodoList,
-                failAction: (request, h, error) => { throw error; }
             },
         }
     });

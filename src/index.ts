@@ -1,6 +1,10 @@
 //rotas
 import * as TodoList from './routes/todolist';
 import * as Todo from './routes/todo';
+import * as User from './routes/user';
+
+//plugins
+import * as JwtPlugin from './plugins/jwt';
 
 //Configurações
 import * as Database from './database';
@@ -16,10 +20,13 @@ process.on('unhandledRejection', (reason: any) => {
     console.error(`unhandledRejection ${reason}`);
 });
 
-const start = () =>{
+const start = async () =>{
     const database = Database.start();
     TodoList.register(server, database);
     Todo.register(server, database);
+    User.register(server, database);
+
+    await JwtPlugin.register(server,database);
     server.start();
 }
 
