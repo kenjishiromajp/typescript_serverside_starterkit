@@ -23,4 +23,16 @@ export function register(
             }
         }
     });
+
+    server.route({
+        path: "/todos/{id}",
+        method: ["PATCH", "PUT"],
+        handler: todoController.updateTodo,
+        options:{
+            // validate: {
+            //     payload: Validator.validateTodo,
+            //     failAction: (request, h, error) => { throw error; }
+            // }
+        }
+    });
 }

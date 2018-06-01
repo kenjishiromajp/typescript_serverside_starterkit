@@ -29,4 +29,26 @@ export class TodoController {
             return Boom.badImplementation(error);
         }
     }
+    async updateTodo(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+        try {
+            const id = request.params['id'];
+            const todo = request.payload;
+            const keysToSet = Object.keys(todo).reduce((prev, current)=>{
+                return {
+                    ...prev,
+                    [`todos.$.${current}`] : todo[current],
+                };
+            },{});
+
+            const todoList = await this.database.todoListModel.findOneAndUpdate(
+                { 'todos._id': id },
+                { '$set': keysToSet },
+                { new: true }
+            );
+            const newTodo = todoList.todos.find((todo )=> todo._id.toString() === id )
+            return h.response(newTodo).code(200);
+        } catch (error) {
+            return Boom.badImplementation(error);
+        }
+    }
 };
