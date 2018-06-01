@@ -36,7 +36,10 @@ export class TodoListController {
     async deleteTodoList(request: Hapi.Request, h: Hapi.ResponseToolkit) {
         try{
             const id = request.params['id'];
-            const todolist = await this.database.todoListModel.findByIdAndRemove(id)
+            const todolist = await this.database.todoListModel.findByIdAndRemove(id);
+            if(!todolist){
+                return Boom.notFound();
+            }
             return h.response().code(204);
         }catch(error){
             return Boom.badImplementation(error);

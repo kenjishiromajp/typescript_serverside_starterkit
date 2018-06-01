@@ -51,4 +51,22 @@ export class TodoController {
             return Boom.badImplementation(error);
         }
     }
+    async deleteTodo(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+        try {
+            const id = request.params['id'];
+            const todo = await this.database.todoListModel
+                .findOneAndUpdate(
+                    { 'todos._id': id },
+                    { $pull: { todos: { _id: id } } },
+                    { new: true }
+                );
+            if(!todo){
+                return Boom.notFound();
+            }
+            return h.response().code(204);
+        } catch (error) {
+            console.log(error);
+            return Boom.badImplementation(error);
+        }
+    }
 };

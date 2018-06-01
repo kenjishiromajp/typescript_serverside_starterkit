@@ -35,4 +35,10 @@ export function register(
             }
         }
     });
+
+    server.route({
+        path: "/todos/{id}",
+        method: "DELETE",
+        handler: todoController.deleteTodo
+    });
 }
