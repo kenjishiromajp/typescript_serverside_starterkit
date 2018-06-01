@@ -18,7 +18,7 @@ export function register(
         handler: todoController.createTodo,
         options:{
             validate: {
-                payload: Validator.validateTodo,
+                payload: Validator.validateCreateTodo,
                 failAction: (request, h, error) => { throw error; }
             }
         }

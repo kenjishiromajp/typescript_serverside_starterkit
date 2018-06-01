@@ -24,10 +24,9 @@ export function register(
         handler: todoListController.createTodoList,
         options:{
             validate:{
-                payload: Validator.validateTodoList,
+                payload: Validator.validateCreateTodoList,
                 failAction: (request, h, error) => { throw error; }
             },
-            
         }
     });
 }
