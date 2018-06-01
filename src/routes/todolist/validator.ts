@@ -7,3 +7,7 @@ export const validateCreateTodoList = Joi.object().keys({
         done: Joi.boolean()
     }))
 });
+
+export const validateUpdateTodoList = Joi.object().keys({
+    name: Joi.string(),
+});

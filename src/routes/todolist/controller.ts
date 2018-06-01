@@ -20,4 +20,17 @@ export class TodoListController {
             return Boom.badImplementation(error);
         }
     }
+    async updateTodoList(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+        try{
+            const { payload } = request;
+            const id = request.params['id'];
+            const todolist = await this.database.todoListModel.findByIdAndUpdate(id, 
+                { $set: payload },
+                { new: true }
+            );
+            return h.response(todolist).code(200);
+        }catch(error){
+            return Boom.badImplementation(error);
+        }
+    }
 };

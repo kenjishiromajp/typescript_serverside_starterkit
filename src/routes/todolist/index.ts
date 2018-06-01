@@ -29,4 +29,16 @@ export function register(
             },
         }
     });
+
+    server.route({
+        path: "/todolists/{id}",
+        method: ["PATCH","PUT"],
+        handler: todoListController.updateTodoList,
+        options:{
+            validate:{
+                payload: Validator.validateUpdateTodoList,
+                failAction: (request, h, error) => { throw error; }
+            },
+        }
+    });
 }
