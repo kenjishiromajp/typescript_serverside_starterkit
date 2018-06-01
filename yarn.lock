@@ -47,6 +47,12 @@
   version "13.0.8"
   resolved "https://registry.yarnpkg.com/@types/joi/-/joi-13.0.8.tgz#224d5da224036f0c15b35e6980ba9de63b8ea374"
 
+"@types/jsonwebtoken@^7.2.7":
+  version "7.2.7"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-7.2.7.tgz#5dd62e0c0a0c6f211c3c1d13d322360894625b47"
+  dependencies:
+    "@types/node" "*"
+
 "@types/mime-db@*":
   version "1.27.0"
   resolved "https://registry.yarnpkg.com/@types/mime-db/-/mime-db-1.27.0.tgz#9bc014a1fd1fdf47649c1a54c6dd7966b8284792"
@@ -1003,7 +1009,7 @@ joi@13.x.x, joi@^13.3.0:
     isemail "3.x.x"
     topo "3.x.x"
 
-jsonwebtoken@^8.1.0:
+jsonwebtoken@^8.1.0, jsonwebtoken@^8.2.2:
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.2.2.tgz#76d7993fda79660d71bd0f933109e1f133734b20"
   dependencies:

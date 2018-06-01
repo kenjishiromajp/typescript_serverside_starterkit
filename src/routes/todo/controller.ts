@@ -9,18 +9,25 @@ export class TodoController {
         this.database = database;
     }
     async createTodo(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+        if(!request.auth.isAuthenticated){
+            return Boom.forbidden();
+        }
         try {
             const { todoList_id, ...todo } = <ITodo>request.payload;
+            const user_id = request.auth.credentials['id'];
             let todoList = await this.database.todoListModel
-                .findByIdAndUpdate(
-                    { _id: todoList_id },
+                .findByIdAndUpdate( 
+                    { 
+                        _id: todoList_id,
+                        user_id,
+                    },
                     { $push: {todos: todo} },
                     { new: true, runValidators: true }
                 );
-            const todoCreated = todoList.todos[todoList.todos.length-1];
             if(!todoList){
                 return Boom.notFound();
             }
+            const todoCreated = todoList.todos[todoList.todos.length-1];
             return h.response({
                 todoList_id,
                 ...todoCreated.toJSON(),
@@ -30,6 +37,9 @@ export class TodoController {
         }
     }
     async updateTodo(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+        if(!request.auth.isAuthenticated){
+            return Boom.forbidden();
+        }
         try {
             const id = request.params['id'];
             const todo = request.payload;
@@ -40,8 +50,12 @@ export class TodoController {
                 };
             },{});
 
+            const user_id = request.auth.credentials['id'];
             const todoList = await this.database.todoListModel.findOneAndUpdate(
-                { 'todos._id': id },
+                { 
+                    'todos._id': id,
+                    user_id,
+                },
                 { '$set': keysToSet },
                 { new: true }
             );
@@ -52,11 +66,18 @@ export class TodoController {
         }
     }
     async deleteTodo(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+        if(!request.auth.isAuthenticated){
+            return Boom.forbidden();
+        }
         try {
             const id = request.params['id'];
+            const user_id = request.auth.credentials['id'];
             const todo = await this.database.todoListModel
                 .findOneAndUpdate(
-                    { 'todos._id': id },
+                    { 
+                        'todos._id': id,
+                        user_id,
+                    },
                     { $pull: { todos: { _id: id } } },
                     { new: true }
                 );

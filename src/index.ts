@@ -22,11 +22,15 @@ process.on('unhandledRejection', (reason: any) => {
 
 const start = async () =>{
     const database = Database.start();
+
+    //Registrar os plugins antes das rotas
+    await JwtPlugin.register(server,database);
+
+    //Registrando as rotas
     TodoList.register(server, database);
     Todo.register(server, database);
     User.register(server, database);
 
-    await JwtPlugin.register(server,database);
     server.start();
 }
 

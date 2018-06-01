@@ -3,7 +3,7 @@ import { ITodoList } from '../todolist/interface';
 
 export const todoSchema = new Mongoose.Schema({
     name: { type: String, required: true },
-    done: { type: Boolean, default: false },
+    done: { type: Boolean, default: false }
 },{
     timestamps: true,
     toJSON: {
@@ -18,6 +18,7 @@ export const todoSchema = new Mongoose.Schema({
 
 export const todoListSchema = new Mongoose.Schema({
     name: {type: String, required: true},
+    user_id: { type: String, required: true, default: null },
     todos: [todoSchema]
 },{
     timestamps: true,

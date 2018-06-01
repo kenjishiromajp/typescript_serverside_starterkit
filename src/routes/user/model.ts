@@ -11,7 +11,7 @@ function hashPassword(password: string): string
 export const userSchema = new Mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, select: false, required: true },
+    password: { type: String, required: true },
 },{
     timestamps: true,
     toJSON: {
@@ -31,7 +31,7 @@ userSchema.pre('save',function(next){
     }
     return next();
 });
-userSchema.methods.validatePassword = function(password){
+userSchema.methods.validatePassword = function( password:  string){
     return Bcrypt.compareSync(password, this.password);
 }
 userSchema.plugin(UniqueValidator);

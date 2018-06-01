@@ -15,7 +15,10 @@ export function register(
     server.route({
         path: "/todolists",
         method: "GET",
-        handler: todoListController.getTodoLists
+        handler: todoListController.getTodoLists,
+        options: {
+            auth: 'jwt',
+        }
     });
 
     server.route({
@@ -23,6 +26,7 @@ export function register(
         method: "POST",
         handler: todoListController.createTodoList,
         options:{
+            auth: 'jwt',
             validate:{
                 payload: Validator.validateCreateTodoList,
             },
@@ -34,6 +38,7 @@ export function register(
         method: ["PATCH","PUT"],
         handler: todoListController.updateTodoList,
         options:{
+            auth: 'jwt',
             validate:{
                 payload: Validator.validateUpdateTodoList,
             },
@@ -44,5 +49,8 @@ export function register(
         path: "/todolists/{id}",
         method: "DELETE",
         handler: todoListController.deleteTodoList,
+        options:{
+            auth: 'jwt',
+        }
     });
 }

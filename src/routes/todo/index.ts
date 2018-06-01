@@ -17,6 +17,7 @@ export function register(
         method: "POST",
         handler: todoController.createTodo,
         options:{
+            auth: 'jwt',
             validate: {
                 payload: Validator.validateCreateTodo,
             }
@@ -28,6 +29,7 @@ export function register(
         method: ["PATCH", "PUT"],
         handler: todoController.updateTodo,
         options:{
+            auth: 'jwt',
             validate: {
                 payload: Validator.validateUpdateTodo,
             }
@@ -37,6 +39,9 @@ export function register(
     server.route({
         path: "/todos/{id}",
         method: "DELETE",
-        handler: todoController.deleteTodo
+        handler: todoController.deleteTodo,
+        options:{
+            auth: 'jwt',
+        }
     });
 }
