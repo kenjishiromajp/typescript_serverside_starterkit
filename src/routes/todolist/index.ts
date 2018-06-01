@@ -41,4 +41,10 @@ export function register(
             },
         }
     });
+
+    server.route({
+        path: "/todolists/{id}",
+        method: "DELETE",
+        handler: todoListController.deleteTodoList,
+    });
 }

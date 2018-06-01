@@ -33,4 +33,13 @@ export class TodoListController {
             return Boom.badImplementation(error);
         }
     }
+    async deleteTodoList(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+        try{
+            const id = request.params['id'];
+            const todolist = await this.database.todoListModel.findByIdAndRemove(id)
+            return h.response().code(204);
+        }catch(error){
+            return Boom.badImplementation(error);
+        }
+    }
 };
